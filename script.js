@@ -151,6 +151,7 @@ initStarCanvas();
    HERO
 ══════════════════════════════════════ */
 function startHero() {
+  console.log("🚀 Starting Hero animations...");
   // Date badge
   const badge = document.getElementById('todayDate');
   if (badge) {
@@ -161,12 +162,16 @@ function startHero() {
   if (fy) fy.textContent = new Date().getFullYear();
 
   // Typewriter for name
+  console.log("✍️ Starting typewriter for Chhavi");
   typewriterEffect('heroName', 'Chhavi', 120);
 }
 
 function typewriterEffect(elId, text, speed) {
   const el = document.getElementById(elId);
-  if (!el) return;
+  if (!el) {
+    console.error(`❌ Element with id ${elId} not found!`);
+    return;
+  }
   el.textContent = '';
   let i = 0;
   function type() {

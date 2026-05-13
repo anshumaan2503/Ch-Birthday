@@ -12,7 +12,8 @@ let preloaderDone = false;
 function dismissPreloader() {
   if (preloaderDone) return;
   preloaderDone = true;
-  document.getElementById('preloader').classList.add('done');
+  const pl = document.getElementById('preloader');
+  if (pl) pl.classList.add('done');
   startHero();
 }
 

@@ -93,8 +93,13 @@ body {
   display: flex; align-items: center; justify-content: center;
   z-index: 10000;
   transition: opacity 0.8s ease, visibility 0.8s ease;
+  /* CSS-only safety net: auto-hide after 3.5s even if JS fails */
+  animation: preloaderAutoHide 0.8s ease 3.5s forwards;
 }
-.preloader.done { opacity: 0; visibility: hidden; }
+@keyframes preloaderAutoHide {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+.preloader.done { opacity: 0; visibility: hidden; pointer-events: none; animation: none; }
 .preloader-inner {
   position: relative;
   width: 120px; height: 120px;

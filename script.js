@@ -9,12 +9,17 @@ const BIRTHDAY_DAY   = 14;  // day
 /* ══════════════════════════════════════
    PRELOADER
 ══════════════════════════════════════ */
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('preloader').classList.add('done');
-    startHero();
-  }, 1600);
-});
+/* Hard cap: always dismiss preloader within 3s, even if assets are still loading */
+let preloaderDone = false;
+function dismissPreloader() {
+  if (preloaderDone) return;
+  preloaderDone = true;
+  document.getElementById('preloader').classList.add('done');
+  startHero();
+}
+
+window.addEventListener('load', () => setTimeout(dismissPreloader, 1600));
+setTimeout(dismissPreloader, 3000); // fallback: never stuck beyond 3s
 
 /* ══════════════════════════════════════
    CUSTOM CURSOR

@@ -1,6 +1,4 @@
-/* =============================================
-   BIRTHDAY CHHAVI — SCRIPT (PREMIUM REDESIGN)
-   ============================================= */
+console.log("🎂 Birthday Script Initializing...");
 
 /* ── CONFIG: set Chhavi's birthday ── */
 const BIRTHDAY_MONTH = 5;   // 1=Jan…12=Dec

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Kachuuu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <svg class="preloader-ring" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(255,200,120,0.15)" stroke-width="1"/>
+        <circle cx="50" cy="50" r="40" fill="none" stroke="#e8c17a" stroke-width="1" stroke-dasharray="251" stroke-dashoffset="251" class="ring-progress"/>
+      </svg>
+      <span class="preloader-text">for Chhavi</span>
+    </div>
+  </div>
+
+  <!-- CURSOR -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-trail" id="cursorTrail"></div>
+
+  <!-- ═══════════════════════════════
+       HERO
+  ═══════════════════════════════ -->
+  <section id="hero">
+    <canvas id="starCanvas"></canvas>
+
+    <div class="hero-date-badge">
+      <span id="todayDate"></span>
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-from">A birthday letter from Anshuman</p>
+      <h1 class="hero-heading">
+        <span class="hero-line-1">Happy</span>
+        <span class="hero-line-2">Birthday</span>
+      </h1>
+      <p class="hero-name" id="heroName"></p>
+      <p class="hero-sub">May today feel as extraordinary as you are</p>
+      <button class="hero-btn" id="heroCelebrate">
+        <span>Celebrate</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 3l14 9-14 9V3z"/></svg>
+      </button>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>scroll</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       COUNTDOWN
+  ═══════════════════════════════ -->
+  <section id="countdown-section" class="reveal">
+    <div class="cd-bg-text">TODAY</div>
+    <div class="section-wrap">
+      <div id="countdownInner"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       BIRTHDAY CAKE CANDLE WISHES
+  ═══════════════════════════════ -->
+  <section id="wish-section" class="reveal">
+    <div class="section-wrap">
+      <div class="section-label">interactive</div>
+      <h2 class="section-heading">Light each candle,<br><em>a wish awaits you</em></h2>
+      <p class="section-body">Every flame carries something I wished for you. Tap each one and let it find you.</p>
+    </div>
+
+    <!-- CAKE SCENE -->
+    <div class="cake-scene" id="cakeScene">
+
+      <!-- Floating sparkles bg -->
+      <div class="cake-sparkles" id="cakeSparkles"></div>
+
+      <!-- Cake SVG structure -->
+      <div class="cake-wrap">
+
+        <!-- Candles row -->
+        <div class="candles-row" id="candlesRow">
+          <!-- injected by JS -->
+        </div>
+
+        <!-- Cake body -->
+        <div class="cake-body">
+          <div class="cake-tier cake-top">
+            <div class="cake-drip cake-drip-top"></div>
+            <div class="cake-tier-face">
+              <span class="cake-deco">✦ Happy Birthday ✦</span>
+            </div>
+          </div>
+          <div class="cake-tier cake-bottom">
+            <div class="cake-drip cake-drip-bottom"></div>
+            <div class="cake-tier-face">
+              <span class="cake-deco cake-deco-sub">Chhavi</span>
+            </div>
+          </div>
+          <div class="cake-plate"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="section-wrap wish-progress-wrap">
+      <div class="wish-progress-bar">
+        <div class="wish-progress-fill" id="wishProgressFill"></div>
+      </div>
+      <p class="wish-progress-text"><span id="wishCount">0</span> of 5 wishes lit</p>
+    </div>
+
+    <!-- Wish Modal -->
+    <div class="wish-modal-overlay" id="wishOverlay">
+      <div class="wish-modal" id="wishModal">
+        <button class="wish-modal-close" id="wishModalClose">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="wish-modal-flame-icon">🕯️</div>
+        <p class="wish-modal-num" id="wishModalNum"></p>
+        <p class="wish-modal-text" id="wishModalText"></p>
+        <div class="wish-modal-from">— Anshuman</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       PHOTO MEMORIES
+  ═══════════════════════════════ -->
+  <section id="memories-section" class="reveal">
+    <div class="section-wrap">
+      <div class="section-label">memories</div>
+      <h2 class="section-heading">Just you,<br><em>being you</em></h2>
+    </div>
+
+    <div class="gallery-track" id="galleryTrack">
+      <div class="gallery-inner" id="galleryInner">
+
+        <div class="gallery-card">
+          <div class="gallery-img-wrap">
+            <img src="photos/1.png" alt="Chhavi" onerror="this.src='https://placehold.co/360x440/1a1025/e8c17a?text=✦'" />
+          </div>
+          <p class="gallery-caption">Radiant as always</p>
+        </div>
+
+        <div class="gallery-card">
+          <div class="gallery-img-wrap">
+            <img src="photos/2.png" alt="Chhavi" onerror="this.src='https://placehold.co/360x440/0f1a20/e8c17a?text=✦'" />
+          </div>
+          <p class="gallery-caption">That smile though</p>
+        </div>
+
+        <div class="gallery-card">
+          <div class="gallery-img-wrap">
+            <img src="photos/3.png" alt="Chhavi" onerror="this.src='https://placehold.co/360x440/1a1025/e8c17a?text=✦'" />
+          </div>
+          <p class="gallery-caption">Glowing, as usual</p>
+        </div>
+
+        <div class="gallery-card">
+          <div class="gallery-img-wrap">
+            <img src="photos/4.png" alt="Chhavi" onerror="this.src='https://placehold.co/360x440/0f1a20/e8c17a?text=✦'" />
+          </div>
+          <p class="gallery-caption">Pure energy</p>
+        </div>
+
+        <div class="gallery-card">
+          <div class="gallery-img-wrap">
+            <img src="photos/5.png" alt="Chhavi" onerror="this.src='https://placehold.co/360x440/1a1025/e8c17a?text=✦'" />
+          </div>
+          <p class="gallery-caption">Effortlessly her</p>
+        </div>
+
+        <div class="gallery-card">
+          <div class="gallery-img-wrap">
+            <img src="photos/6.png" alt="Chhavi" onerror="this.src='https://placehold.co/360x440/0f1a20/e8c17a?text=✦'" />
+          </div>
+          <p class="gallery-caption">Sunshine in human form</p>
+        </div>
+
+        <div class="gallery-card">
+          <div class="gallery-img-wrap">
+            <img src="photos/7.png" alt="Chhavi" onerror="this.src='https://placehold.co/360x440/1a1025/e8c17a?text=✦'" />
+          </div>
+          <p class="gallery-caption">Just being wonderful</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="gallery-nav">
+      <button class="gnav-btn" id="gnavPrev">←</button>
+      <div class="gnav-dots" id="gnavDots"></div>
+      <button class="gnav-btn" id="gnavNext">→</button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       QUOTES
+  ═══════════════════════════════ -->
+  <section id="quotes-section" class="reveal">
+    <div class="section-wrap">
+      <div class="section-label">blessings</div>
+      <h2 class="section-heading">Words for<br><em>the Year Ahead</em></h2>
+    </div>
+
+    <div class="quotes-marquee-wrap">
+      <div class="quotes-marquee" id="quotesMarquee">
+        <span class="qm-item">"May every room you walk into feel your presence before you even speak."</span>
+        <span class="qm-sep">✦</span>
+        <span class="qm-item">"Another year wiser, and somehow even more wonderful."</span>
+        <span class="qm-sep">✦</span>
+        <span class="qm-item">"The best is not behind you — it is being written right now."</span>
+        <span class="qm-sep">✦</span>
+        <span class="qm-item">"May you always find your way back to yourself, no matter how far you wander."</span>
+        <span class="qm-sep">✦</span>
+        <span class="qm-item">"You deserve a day as extraordinary as you make every ordinary day for others."</span>
+        <span class="qm-sep">✦</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       LETTER FROM ANSHUMAN
+  ═══════════════════════════════ -->
+  <section id="letter-section" class="reveal">
+    <div class="section-wrap">
+      <div class="letter-container">
+        <div class="letter-ornament">✦</div>
+        <p class="letter-greeting">Dear Chhavi,</p>
+        <div class="letter-body">
+          <p>
+            May every dream you've ever dared to dream — the quiet ones you've kept to yourself,
+            and the loud ones you chase in plain sight — find their way to you this year.
+          </p>
+          <p>
+            I hope you find peace in places that once felt heavy, people who feel genuine,
+            and moments that make life feel lighter again.
+          </p>
+          <p>
+            You carry a kind of warmth that most people spend their whole lives searching for.
+            The world is genuinely better, brighter, and more honest because you're in it.
+          </p>
+          <p>
+            Here's to the adventures that haven't happened yet, the laughter waiting around
+            every corner, and a year so good it makes the last one jealous.
+          </p>
+        </div>
+        <p class="letter-sign">With love &amp; a ridiculous amount of good wishes,</p>
+        <p class="letter-author">Anshuman</p>
+        <div class="letter-ornament letter-ornament-bottom">✦</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════
+       FOOTER
+  ═══════════════════════════════ -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <p class="footer-name">Chhavi</p>
+      <p class="footer-wish">Happy Birthday ✦ With Good Wishes, Anshuman</p>
+      <p class="footer-year" id="footerYear"></p>
+    </div>
+  </footer>
+
+  <!-- MUSIC -->
+  <button class="music-btn" id="musicBtn" title="Toggle music" aria-label="Toggle music">
+    <svg id="musicIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M9 18V5l12-2v13M9 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm12 0c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2z"/>
+    </svg>
+  </button>
+  <audio id="bgMusic" loop>
+    <source src="photos/birthday.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
